@@ -4,7 +4,7 @@
     import { onMounted } from "vue";
     import { RouterLink } from "vue-router";
 
-    const { members, loading, getAllMembers } = useMembersService();
+    const { members, loading, deleteMember, getAllMembers } = useMembersService();
 
     onMounted(() => {
         getAllMembers();
@@ -39,6 +39,9 @@
                     <RouterLink class="btn btn-outline-primary" :to="{ name: 'memberEdit', params: { id: member.id } }" title="Редактировать">
                         <i class="bi bi-pencil-fill"></i>
                     </RouterLink>
+                    <button class="btn btn-outline-danger ms-1" title="Удалить" @click="deleteMember(member.id)">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
                 </td>
             </tr>
         </tbody>

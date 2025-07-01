@@ -91,6 +91,23 @@ export default function useMembersService() {
         }
     };
 
+    const deleteMember = async (member_id) => {
+        const confirmed = confirm("Вы уверены, что хотите удалить?");
+        if (confirmed) {
+            loading.value = true;
+            try {
+                const response = await http.delete(url + "/" + member_id);
+                if (response.status === 204) {
+                    await getAllMembers();
+                }
+            } catch (e) {
+                console.log(e);
+            } finally {
+                loading.value = false;
+            }
+        }
+    };
+
     return {
         members,
         member,
@@ -101,6 +118,7 @@ export default function useMembersService() {
         getMemberById,
         createMember,
         updateMember,
+        deleteMember,
         is_invalid,
     };
 }
