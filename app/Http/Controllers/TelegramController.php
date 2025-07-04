@@ -29,6 +29,11 @@ class TelegramController extends Controller
             ->where("is_active", true)
             ->get();
 
+        if ($members->isEmpty()) {
+            Log::info("На {$today} именинников нет. Поздравление не отправлено.");
+            return;
+        }
+
         $congratulation = "Сегодня/Bugun {$today} \nС днём рождения / Tug'ilgan kuningiz muborak \n\n";
 
         $caption = $congratulation . $members->map(function ($m) {
