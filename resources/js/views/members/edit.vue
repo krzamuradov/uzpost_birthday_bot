@@ -29,7 +29,7 @@
                 <Input label="Имя" v-model="member.firstname" name="firstname" :is_invalid="is_invalid('firstname')" />
             </div>
             <div class="col-12">
-                <Input label="Отчество" v-model="member.middlename" name="middlename" :is_invalid="is_invalid('middlename')" />
+                <Input label="Отчество" :is_required="false" v-model="member.middlename" name="middlename" :is_invalid="is_invalid('middlename')" />
             </div>
             <div class="col-12">
                 <Input label="Дата рождения" v-model="member.birthday_at" name="birthday_at" type="date" :is_invalid="is_invalid('birthday_at')" />
