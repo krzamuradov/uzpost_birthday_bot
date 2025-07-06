@@ -4,6 +4,7 @@
         name: { type: String, required: true },
         label: { type: String, required: true },
         is_invalid: { type: String, default: "" },
+        is_required: { type: Boolean, default: true },
     });
 
     const model = defineModel();
@@ -12,7 +13,10 @@
 <template>
     <div class="position-relative">
         <input :type="props.type" :name="props.name" :id="props.name" class="form-control" v-model="model" :class="{ 'is-invalid': props.is_invalid }" v-bind="$attrs" />
-        <label :for="props.name" class="position-absolute top-0 start-0 translate-middle-y bg-white px-1 ms-3 small text-secondary rounded-0">{{ props.label }}</label>
+        <label :for="props.name" class="position-absolute top-0 start-0 translate-middle-y bg-white px-1 ms-3 small text-secondary rounded-0">
+            <span>{{ props.label }}</span>
+            <span class="text-danger fw-bold p-1 fs-6" v-if="props.is_required">*</span>
+        </label>
         <div class="invalid-feedback" v-if="props.is_invalid">{{ props.is_invalid }}</div>
     </div>
 </template>
